@@ -39,10 +39,8 @@ app.get('/todos/:id', (req, res) => {
     return res.status(404).send();
 
   }
-
   //validate id using isValid (mongoose-queries)
     // not valid - respond with 404 - send back empty body
-
   //findById
       //success
       //if todo - send back
@@ -59,6 +57,25 @@ app.get('/todos/:id', (req, res) => {
       res.status(400).send();
     })
 });
+
+app.delete('/todos/:id', (req, res) => {
+  //get id
+  var id = req.params.id;
+  if(!ObjectID.isValid(id)) {
+    console.log("deleting ID is not valid")
+    return res.status(404).send();
+  }
+  //remove todo by id
+  Todo.findByIdAndRemove(id)
+    .then((todo) => {
+      if(!todo) {
+        return res.status(404).send();
+      }
+      res.send({todo})
+    }).catch((e) => res.status(400).send());
+});
+
+//app.post('/user')
 
 app.listen(3000, () => {
   console.log('Started on port 3000')
