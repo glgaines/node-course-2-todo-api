@@ -1,4 +1,6 @@
 // server.js is just resonsible for routes.
+require('./config/config');
+
 const _ = require('lodash')
 const {ObjectID} = require('mongodb');
 const express = require('express');
