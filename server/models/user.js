@@ -76,9 +76,9 @@ UserSchema.pre('save', function(next) {
   // in order to avoid re hashing the password...
   if(user.isModified('password')) {
     bcrypt.genSalt(10, (err,salt) => {
-      console.log(err)
+      //console.log(err)
       bcrypt.hash(user.password, salt, (err, hash) => {
-        console.log(err)
+        //console.log(err)
         user.password = hash;
         next();
       })
