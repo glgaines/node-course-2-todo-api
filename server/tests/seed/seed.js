@@ -45,4 +45,4 @@ const populateUsers = (done) => {
   }).then(() => done());
 };
 
-module.exports = {todos, populateTodos, populateUsers, users}
+module.exports = {todos, populateTodos, users, populateUsers}
