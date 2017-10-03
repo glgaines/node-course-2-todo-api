@@ -53,6 +53,19 @@ UserSchema.methods.generateAuthToken = function() {
       return token;
     })
 };
+//remove any object from the array that has a token of the current user
+//$pull - mongo operator that removes any objects in the database that match a criteria
+UserSchema.methods.removeToken = function(token) {
+  var user = this;
+  //return to allow chaining
+  return user.update({
+    $pull: {
+      tokens: {  // which array to look in
+        token: token  //what to match - passed in token
+      }
+    }
+  })
+};
 
 //model methods
 UserSchema.statics.findByToken = function(token) {
